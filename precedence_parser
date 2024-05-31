@@ -1,0 +1,37 @@
+import streamlit as st
+
+def f():
+    st.error("Not operator grammar")
+    st.stop()
+
+def main():
+    st.title("Operator Grammar Checker")
+    
+    n = st.number_input("Enter the total number of productions:", min_value=1, step=1)
+    
+    grm = []
+    for i in range(n):
+        production = st.text_input(f"Production {i+1}:")
+        grm.append(production)
+
+    flag = 0
+
+    for production in grm:
+        j = 2
+
+        while j < len(production):
+            if production[3] in ['+', '-', '*', '/']:
+                flag = 1
+            elif production[j] == '$':
+                flag = 0
+                f()
+            else:
+                flag = 0
+                f()
+            j += 1
+
+    if flag == 1:
+        st.success("Operator grammar")
+
+if _name_ == "_main_":
+    main()
